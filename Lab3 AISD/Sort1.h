@@ -64,3 +64,23 @@ stats selectionSort(Iterator begin, Iterator end) {
 
     return sorting_stats;
 }
+
+stats insertionSort(std::vector<int>& data) {
+
+    stats sorting_stats;
+
+    for (size_t i = 1; i < data.size(); ++i)
+    {
+        for (size_t j = i; j > 0; --j)
+        {
+            ++sorting_stats.comparison_count;
+            if (data[j - 1] > data[j])
+            {
+                swap(data[j - 1], data[j]);
+                ++sorting_stats.copy_count;
+            }
+        }
+    }
+
+    return sorting_stats;
+}
