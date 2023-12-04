@@ -65,22 +65,26 @@ stats selectionSort(Iterator begin, Iterator end) {
     return sorting_stats;
 }
 
-stats insertionSort(std::vector<int>& data) {
 
-    stats sorting_stats;
+stats shellSort(std::vector<int>& data) {
+    stats sortingState;
 
-    for (size_t i = 1; i < data.size(); ++i)
+    int t = 0;
+    int p = 0;
+    for (int s = data.size() / 2; s > 0; s /= 2)    
     {
-        for (size_t j = i; j > 0; --j)
-        {
-            ++sorting_stats.comparison_count;
-            if (data[j - 1] > data[j])
+        for (int i = s; i < data.size(); ++i) { 
+            for (int j = i - s; j >= 0; j -= s)   
             {
-                swap(data[j - 1], data[j]);
-                ++sorting_stats.copy_count;
+                ++sortingState.comparison_count;
+                if (data[j] > data[j + s])
+                {
+                    swap(data[j], data[j + s]);
+                    ++sortingState.copy_count;
+                }
             }
         }
     }
 
-    return sorting_stats;
+    return sortingState;
 }
